@@ -56,6 +56,7 @@ npm run build
 | slider-move        | `offset`         | Callback function, will be executed when user touch and move finger over Swiper and move it. Receives swiper instance and 'touchmove' event as an arguments. |
 | ================== | ================ | ============================ |
 
-base on  [vue-swiper](https://github.com/weilao/vue-swiper)
+###base on
+[vue-swiper](https://github.com/weilao/vue-swiper)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
