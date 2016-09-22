@@ -1,6 +1,9 @@
 # slider 
 auto banner for more function
-[online-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo.html)
+
+##demo
+
+[online-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo1.html)
 
 > A Vue.js project
 
@@ -24,9 +27,12 @@ npm run build
     :slides="slides"
     :repeating="true"
     :auto="5000">
-    <a v-for="slide in slides" track-by="$index" :href="slide.value">
-      <img width="500" height="156" :src="slide.image" />
-    </a>
+    <!-- div container is neccessary -->
+    <div v-for="slide in slides" track-by="$index">
+      <a :href="slide.value">
+        <img width="350" height="180" :src="slide.image" />
+      </a>
+    </div>
   </slider>
 ```
 
@@ -38,7 +44,7 @@ npm run build
 | mousewheel-control   | `Boolean` | `true`       | Set to true to enable navigation through slides using mouse wheel. |
 | pagination-visible   | `Boolean` | `false`      | Toggle (hide/true) pagination container visibility when click on Slider's container    |
 | performace-mode      | `Boolean` | `false`      | Disable advance effect for better performance.      
-| slides      | `Array` | `[]`      | the banner data be used to observe by pagination when you add or remove a child slide  
+| slides      | `Array` | `[]`      | the banner data just be used to observe by pagination when you add or remove a child slide  
 | repeating      | `Boolean` | `false`      | Set to true to enable repeating from last to first or first to last                 |
 | auto      | `Number` | `0`      | Set to 0ms to disable silders auto change     |
 | ==================== | ========= | ============ | =================== |

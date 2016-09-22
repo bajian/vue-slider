@@ -98,7 +98,6 @@
                 if (!this.auto) return;
                 let _this=this;
                 _this.intervalId=setInterval(function(){
-                    console.log('interval');
                     _this.next();
                 }, this.auto);
             },

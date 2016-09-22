@@ -10,9 +10,12 @@
     @slide-revert-start="onSlideRevertStart"
     @slide-revert-end="onSlideRevertEnd"
     @slider-move="onSliderMove">
-    <a v-for="slide in slides" track-by="$index" :href="slide.value" :title="slide.title">
-      <img width="500" height="156" :src="slide.image" />
+
+    <div v-for="slide in slides" track-by="$index">
+    <a :href="slide.value">
+      <img width="350" height="180" :src="slide.image" />
     </a>
+    </div>
   </slider>
   <button @click="prependSlide()">prependSlide</button>
   <button @click="appendSlide()">appendSlide</button>
@@ -101,37 +104,30 @@
   }
 
   body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 100%;
+    max-width: 500px;
+    margin: 0 auto
   }
 
   #app {
     color: #2c3e50;
-    margin-top: -100px;
     max-width: 600px;
     font-family: Source Sans Pro, Helvetica, sans-serif;
     text-align: center;
+    width: 100%;
+    margin: 0 auto
   }
-
 
   .swiper {
-    height: 156px;
-    width: 500px;
-  }
+    height: 180px;
+    margin-bottom: 80px;
+    width: 350px;
+    margin: 0 auto
 
-  .swiper-wrap > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 48px;
-    color: #fff;
   }
   /*change the pagination u like */
     .swiper-pagination-bullet.active {
       background: #FB7299 !important;
-      opacity: 1;
     }
+
 </style>
