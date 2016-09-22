@@ -1,5 +1,6 @@
 # slider 
 auto banner for more function
+[online-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo.html)
 
 > A Vue.js project
 
