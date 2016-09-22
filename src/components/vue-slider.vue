@@ -141,8 +141,6 @@
                 return this.direction === VERTICAL;
             },
             _onTouchStart(e) {
-                e.preventDefault();
-                e.stopPropagation();
                 this.autoStop()
                 this.startPos = this._getTouchPos(e);
                 this.delta = 0;
@@ -157,8 +155,6 @@
                 document.addEventListener('mouseup', this._onTouchEnd, false);
             },
             _onTouchMove(e) {
-                e.preventDefault();
-                e.stopPropagation();
                 this.delta = this._getTouchPos(e) - this.startPos;
                 if (!this.performanceMode) {
                     if (this.isHorizontal()) {
