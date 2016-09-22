@@ -34,10 +34,11 @@ npm run build
 ### Properties
 | Name                 | Type      | Default      | Description                                                        |
 |----------------------|-----------|--------------|--------------------------------------------------------------------|
-| direction            | `String`  | `"vertical"` | Could be 'horizontal' or 'vertical' (for vertical slider).         |
+| direction            | `String`  | `"horizontal"` | Could be 'horizontal' or 'vertical' (for vertical slider).         |
 | mousewheel-control   | `Boolean` | `true`       | Set to true to enable navigation through slides using mouse wheel. |
 | pagination-visible   | `Boolean` | `false`      | Toggle (hide/true) pagination container visibility when click on Slider's container    |
-| performace-mode      | `Boolean` | `false`      | Disable advance effect for better performance.                     |
+| performace-mode      | `Boolean` | `false`      | Disable advance effect for better performance.      
+| slides      | `Array` | `[]`      | the banner data be used to observe by pagination when you add or remove a child slide                |
 | ==================== | ========= | ============ | =================== |
 
 ### Methods
