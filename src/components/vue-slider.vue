@@ -96,9 +96,8 @@
             },
             autoBegin() {
                 if (!this.auto) return;
-                let _this=this;
-                _this.intervalId=setInterval(function(){
-                    _this.next();
+                this.intervalId=setInterval(()=>{
+                    this.next();
                 }, this.auto);
             },
             autoStop() {
@@ -115,6 +114,7 @@
                 }
             },
             setPage(page) {
+                this.autoStop();
                 var propName, translateName;
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
@@ -132,6 +132,7 @@
                     return i > page - 2 ? total : total + el[propName];
                 }, 0);
                 this._onTransitionStart();
+                this.autoBegin();
             },
             isHorizontal() {
                 return this.direction === HORIZONTAL;
@@ -147,7 +148,7 @@
                 this.startTranslateY = this.translateY;
                 this.startTime = new Date().getTime();
                 this.dragging = true;
-
+                e.stopPropagation();
                 document.addEventListener('touchmove', this._onTouchMove, false);
                 document.addEventListener('touchend', this._onTouchEnd, false);
                 document.addEventListener('mousemove', this._onTouchMove, false);
@@ -167,6 +168,7 @@
 
                 if (this.isVertical() || this.isHorizontal() && Math.abs(this.delta) > 0) {
                     e.preventDefault();
+                    e.stopPropagation();
                 }
             },
             _onTouchEnd(e) {

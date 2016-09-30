@@ -12,9 +12,9 @@
     @slider-move="onSliderMove">
 
     <div v-for="slide in slides" track-by="$index">
-    <a :href="slide.value">
-      <img width="350" height="180" :src="slide.image" />
-    </a>
+      <a :href="slide.value">
+        <img width="350" height="180" :src="slide.image" />
+      </a>
     </div>
   </slider>
   <button @click="prependSlide()">prependSlide</button>
@@ -126,8 +126,8 @@
 
   }
   /*change the pagination u like */
-    .swiper-pagination-bullet.active {
-      background: #FB7299 !important;
-    }
+  .swiper-pagination-bullet.active {
+    background: #FB7299 !important;
+  }
 
 </style>
