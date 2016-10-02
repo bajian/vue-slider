@@ -218,13 +218,15 @@
                     this.$emit('slide-revert-start', this.currentPage);
                 }
             },
-            _onTransitionEnd() {
+            _onTransitionEnd(e) {
                 this.transitioning = false;
                 if (this._isPageChanged()) {
                     this.$emit('slide-change-end', this.currentPage);
                 } else {
                     this.$emit('slide-revert-end', this.currentPage);
                 }
+                e.stopPropagation()
+
             },
             _isPageChanged() {
                 return this.lastPage !== this.currentPage;
@@ -274,7 +276,6 @@
       border-radius: 50%;
       background-color: #000000;
       opacity: .2;
-      transition: all .5s ease;
       cursor:pointer
     }
 
@@ -291,7 +292,7 @@
 
     .swiper-pagination-bullet {
       display: block;
-      margin: 6px 0;
+      margin: 3px 0;
     }
   }
 
