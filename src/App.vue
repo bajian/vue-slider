@@ -11,7 +11,7 @@
     @slide-revert-end="onSlideRevertEnd"
     @slider-move="onSliderMove">
 
-    <div v-for="slide in slides" track-by="$index">
+    <div v-for="(slide,index) in slides" :key="index">
       <a :href="slide.value">
         <img width="350" height="180" :src="slide.image" />
       </a>

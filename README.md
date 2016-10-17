@@ -1,5 +1,5 @@
 # slider 
-auto banner for more function
+auto banner for more function for Vue2.x
 
 ##demo
 

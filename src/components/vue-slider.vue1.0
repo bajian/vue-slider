@@ -1,23 +1,23 @@
 <template>
     <div class="swiper"
-    :class="[direction, {'dragging': dragging}]"
-    @touchstart="_onTouchStart"
-    @wheel="_onWheel">
-    <div class="swiper-wrap"
-    ref="swiper-wrap"
-    :style="{'transform' : 'translate3d(' + translateX + 'px,' + translateY + 'px, 0)'}"
-    @transitionend="_onTransitionEnd">
-    <slot></slot>
-</div>
-<div class="swiper-pagination"
-v-show="paginationVisible">
-<span class="swiper-pagination-bullet"
-:class="{'active': index+1===currentPage}"
-v-for="(slide,index) in slides"
-:key="index"
-@click="setPage(index+1)"></span>
-</div>
-</div>
+         :class="[direction, {'dragging': dragging}]"
+         @touchstart="_onTouchStart"
+         @wheel="_onWheel">
+        <div class="swiper-wrap"
+             v-el:swiper-wrap
+             :style="{'transform' : 'translate3d(' + translateX + 'px,' + translateY + 'px, 0)'}"
+             @transitionend="_onTransitionEnd">
+            <slot></slot>
+        </div>
+        <div class="swiper-pagination"
+             v-show="paginationVisible">
+            <span class="swiper-pagination-bullet"
+                  :class="{'active': $index+1===currentPage}"
+                  v-for="slide in slides"
+                   track-by="$index"
+                  @click="setPage($index+1)"></span>
+        </div>
+    </div>
 </template>
 <script type="text/babel">
     const VERTICAL = 'vertical';
@@ -73,16 +73,14 @@ v-for="(slide,index) in slides"
         },
         watch:{
             slides:function(){
-                this.slideEls = this.$refs['swiper-wrap'].children;
+                this.slideEls = this.$els.swiperWrap.children;
             }
         },
-        mounted(){
-            this.$nextTick(function () {
-                this._onTouchMove = this._onTouchMove.bind(this);
-                this._onTouchEnd = this._onTouchEnd.bind(this);
-                this.slideEls = this.$refs['swiper-wrap'].children;
-                this.autoBegin();
-            })
+        ready() {
+            this._onTouchMove = this._onTouchMove.bind(this);
+            this._onTouchEnd = this._onTouchEnd.bind(this);
+            this.slideEls = this.$els.swiperWrap.children;
+            this.autoBegin();
         },
         methods: {
 
@@ -131,8 +129,8 @@ v-for="(slide,index) in slides"
                 //偏移的大小
                 this[translateName] = -[].reduce.call(this.slideEls, function (total, el, i) {
                 //previousValue,currentValue,currentIndex
-                return i > page - 2 ? total : total + el[propName];
-            }, 0);
+                    return i > page - 2 ? total : total + el[propName];
+                }, 0);
                 this._onTransitionStart();
                 this.autoBegin();
             },
@@ -240,36 +238,36 @@ v-for="(slide,index) in slides"
 
 <style lang="less">
     .swiper {
-      position: relative;
+  position: relative;
+  overflow: hidden;
+
+  .swiper-wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease;
+
+    > div {
       overflow: hidden;
-
-      .swiper-wrap {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        transition: all 0.4s ease;
-
-        > div {
-          overflow: hidden;
-          flex-shrink: 0;
-          width: 100%;
-          height: 100%;
-      }
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   &.horizontal .swiper-wrap {
     flex-direction: row;
-}
+  }
 
-&.vertical .swiper-wrap {
+  &.vertical .swiper-wrap {
     flex-direction: column;
-}
+  }
 
-&.dragging .swiper-wrap {
+  &.dragging .swiper-wrap {
     transition: none;
-}
+  }
 
-.swiper-pagination {
+  .swiper-pagination {
     position: absolute;
 
     .swiper-pagination-bullet {
@@ -279,15 +277,15 @@ v-for="(slide,index) in slides"
       background-color: #000000;
       opacity: .2;
       cursor:pointer
-  }
+    }
 
-  .swiper-pagination-bullet.active {
+    .swiper-pagination-bullet.active {
       background: #007aff;
       opacity: 1;
+    }
   }
-}
 
-&.vertical .swiper-pagination {
+  &.vertical .swiper-pagination {
     right: 10px;
     top: 50%;
     transform: translate3d(0, -50%, 0);
@@ -295,10 +293,10 @@ v-for="(slide,index) in slides"
     .swiper-pagination-bullet {
       display: block;
       margin: 3px 0;
+    }
   }
-}
 
-&.horizontal .swiper-pagination {
+  &.horizontal .swiper-pagination {
     bottom: 10px;
     width: 100%;
     text-align: center;
@@ -306,8 +304,8 @@ v-for="(slide,index) in slides"
     .swiper-pagination-bullet {
       display: inline-block;
       margin: 0 3px;
+    }
   }
-}
 }
 
 </style>
