@@ -245,6 +245,7 @@ v-for="(slide,index) in slides"
 
       .swiper-wrap {
         display: flex;
+        display: inline-flex;
         width: 100%;
         height: 100%;
         transition: all 0.4s ease;
