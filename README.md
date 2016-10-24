@@ -22,15 +22,15 @@ npm run build
 ```
 
 ```html
-    <slider id="swiper_horizontal"
+    <slider
     :pagination-visible="true"
     :slides="slides"
     :repeating="true"
     :auto="5000">
-    <!-- div container is neccessary -->
-    <div v-for="slide in slides" track-by="$index">
+
+    <div v-for="(slide,index) in slides" :key="index">
       <a :href="slide.value">
-        <img width="350" height="180" :src="slide.image" />
+        <img width="350" height="150" :src="slide.image" />
       </a>
     </div>
   </slider>
@@ -39,22 +39,14 @@ npm run build
 ## Api
 ### Properties
 | Name                 | Type      | Default      | Description                                                        |
-|----------------------|-----------|--------------|--------------------------------------------------------------------|
-| direction            | `String`  | `"horizontal"` | Could be 'horizontal' or 'vertical' (for vertical slider).         |
-| mousewheel-control   | `Boolean` | `true`       | Set to true to enable navigation through slides using mouse wheel. |
+|----------------------|-----------|--------------|------------------------------------------------------------------|
+| mousewheel-control   | `Boolean` | `true`       | Set true to enable navigation through slides using mouse wheel. |
 | pagination-visible   | `Boolean` | `false`      | Toggle (hide/true) pagination container visibility when click on Slider's container    |
-| performace-mode      | `Boolean` | `false`      | Disable advance effect for better performance.      
+| performace-mode      | `Boolean` | `false`      | Disable animation for better performance for bad android.      
 | slides      | `Array` | `[]`      | the banner data just be used to observe by pagination when you add or remove a child slide  
-| repeating      | `Boolean` | `false`      | Set to true to enable repeating from last to first or first to last                 |
+| repeating      | `Boolean` | `false`      | Set true to enable repeating from last to first or first to last                 |
 | auto      | `Number` | `0`      | Set to 0ms to disable silders auto change     |
 | ==================== | ========= | ============ | =================== |
-
-### Methods
-| Method            | Description              |
-|-------------------|--------------------------|
-| next()            | Go next page.            |
-| prev()            | Go previous page.        |
-| setPage(`Number`) | Set current page number. |
 
 ### Events
 | Name                            | Parameters | Description                                                                                                                                                  |
@@ -66,7 +58,3 @@ npm run build
 | slider-move        | `offset`         | Callback function, will be executed when user touch and move finger over Swiper and move it. Receives swiper instance and 'touchmove' event as an arguments. |
 | ================== | ================ | ============================ |
 
-###base on
-[vue-swiper](https://github.com/weilao/vue-swiper)
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
