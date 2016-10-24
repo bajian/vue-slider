@@ -1,23 +1,23 @@
 <template>
-    <div class="swiper"
+   <div class="swiper"
     :class="['horizontal', {'dragging': dragging}]"
     @touchstart="_onTouchStart"
     @wheel="_onWheel">
-    <div class="swiper-wrap"
-    ref="swiper-wrap"
-    :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
-    @transitionend="_onTransitionEnd">
-    <slot></slot>
-</div>
-<div class="swiper-pagination"
-v-show="paginationVisible">
-<span class="swiper-pagination-bullet"
-:class="{'active': index+1===currentPage}"
-v-for="(slide,index) in slides"
-:key="index"
-@click="setPage(index+1)"></span>
-</div>
-</div>
+        <div class="swiper-wrap"
+        ref="swiper-wrap"
+        :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
+        @transitionend="_onTransitionEnd">
+            <slot></slot>
+        </div>
+        <div @click="setPage($event)" class="swiper-pagination"
+        v-show="paginationVisible">
+            <span class="swiper-pagination-bullet"
+            :class="{'active': (index+1)==currentPage}"
+            v-for="(slide,index) in slides"
+            :key="index"
+            :id="index+1"></span>
+        </div>
+    </div>
 </template>
 <script type="text/babel">
 
@@ -107,12 +107,14 @@ v-for="(slide,index) in slides"
                 }
             },
             setPage(page) {
+                if (typeof page!="number") //event
+                    page=page.target.id||1
+                    
                 this.autoStop();
-                var propName, translateName;
+                var propName= 'clientWidth', 
+                translateName= 'translateX';
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
-                    propName = 'clientWidth';
-                    translateName = 'translateX';
                 //偏移的大小
                 this[translateName] = -[].reduce.call(this.slideEls, function (total, el, i) {
                 //previousValue,currentValue,currentIndex
