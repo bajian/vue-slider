@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <slider id="swiper_horizontal"
+    <slider
     :pagination-visible="true"
     :slides="slides"
     :repeating="true"
@@ -13,13 +13,31 @@
 
     <div v-for="(slide,index) in slides" :key="index">
       <a :href="slide.value">
-        <img width="350" height="180" :src="slide.image" />
+        <img width="350" height="150" :src="slide.image" />
       </a>
     </div>
   </slider>
   <button @click="prependSlide()">prependSlide</button>
   <button @click="appendSlide()">appendSlide</button>
+<hr/>
+    <slider
+    :pagination-visible="true"
+    :slides="slides"
+    :auto="0"
+    @slide-change-start="onSlideChangeStart"
+    @slide-change-end="onSlideChangeEnd"
+    @slide-revert-start="onSlideRevertStart"
+    @slide-revert-end="onSlideRevertEnd"
+    @slider-move="onSliderMove">
 
+    <div style="position: relative" v-for="(slide,index) in slides" :key="index">
+      <a :href="slide.value">
+        <img width="350" height="180" :src="slide.image" />
+        <span class="title-mask" v-if="slide.title">{{slide.title}}</span>
+      </a>
+    </div>
+  </slider>
+<h4>different style,not repeating,not auto</h4>
 </div>
 </template>
 
@@ -99,6 +117,19 @@
 </script>
 
 <style>
+.title-mask{
+  opacity: 0.8;
+  background-color: black;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 1.25rem;/* 50px */
+  line-height: 1.25rem;/* 50px */
+  text-overflow: ellipsis;
+  width: 100%;
+  color: #fff
+}
+
   html {
     height: 100%;
   }
@@ -119,15 +150,28 @@
   }
 
   .swiper {
-    height: 180px;
+    height: 150px;
     margin-bottom: 80px;
     width: 350px;
     margin: 0 auto
 
   }
-  /*change the pagination u like */
-  .swiper-pagination-bullet.active {
-    background: #FB7299 !important;
-  }
+
+/*change the pagination u like */
+.swiper-pagination-bullet.active {
+  background: #FB7299 !important;
+}
+.swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 1 !important;
+  margin: 0 2px !important;
+  z-index: 9;
+}
+
+.horizontal .swiper-pagination {
+  margin-right: 10px !important;
+  width: 95% !important;
+  text-align: right !important;
+}
 
 </style>

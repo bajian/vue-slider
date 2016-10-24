@@ -3,7 +3,7 @@ auto banner for more function for Vue2.x
 
 ##demo
 
-[online-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo1.html)
+[online-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo2.html)
 
 > A Vue.js project
 

@@ -1,11 +1,11 @@
 <template>
     <div class="swiper"
-    :class="[direction, {'dragging': dragging}]"
+    :class="['horizontal', {'dragging': dragging}]"
     @touchstart="_onTouchStart"
     @wheel="_onWheel">
     <div class="swiper-wrap"
     ref="swiper-wrap"
-    :style="{'transform' : 'translate3d(' + translateX + 'px,' + translateY + 'px, 0)'}"
+    :style="{'transform' : 'translate3d(' + translateX + 'px,0, 0)'}"
     @transitionend="_onTransitionEnd">
     <slot></slot>
 </div>
@@ -20,16 +20,9 @@ v-for="(slide,index) in slides"
 </div>
 </template>
 <script type="text/babel">
-    const VERTICAL = 'vertical';
-    const HORIZONTAL = 'horizontal';
 
     export default {
         props: {
-            direction: {
-                type: String,
-                default: HORIZONTAL,
-                validator: (value) => [VERTICAL, HORIZONTAL].indexOf(value) > -1
-            },
             mousewheelControl: {
                 type: Boolean,
                 default: true
@@ -61,9 +54,7 @@ v-for="(slide,index) in slides"
                 intervalId: 0,
                 lastPage: 1,
                 translateX: 0,
-                translateY: 0,
                 startTranslateX: 0,
-                startTranslateY: 0,
                 delta: 0,
                 dragging: false,
                 startPos: null,
@@ -120,14 +111,8 @@ v-for="(slide,index) in slides"
                 var propName, translateName;
                 this.lastPage = this.currentPage;
                 this.currentPage = page;
-
-                if (this.isHorizontal()) {
                     propName = 'clientWidth';
                     translateName = 'translateX';
-                } else {
-                    propName = 'clientHeight';
-                    translateName = 'translateY';
-                }
                 //偏移的大小
                 this[translateName] = -[].reduce.call(this.slideEls, function (total, el, i) {
                 //previousValue,currentValue,currentIndex
@@ -136,18 +121,11 @@ v-for="(slide,index) in slides"
                 this._onTransitionStart();
                 this.autoBegin();
             },
-            isHorizontal() {
-                return this.direction === HORIZONTAL;
-            },
-            isVertical() {
-                return this.direction === VERTICAL;
-            },
             _onTouchStart(e) {
                 this.autoStop()
                 this.startPos = this._getTouchPos(e);
                 this.delta = 0;
                 this.startTranslateX = this.translateX;
-                this.startTranslateY = this.translateY;
                 this.startTime = new Date().getTime();
                 this.dragging = true;
                 e.stopPropagation();
@@ -158,17 +136,12 @@ v-for="(slide,index) in slides"
             },
             _onTouchMove(e) {
                 this.delta = this._getTouchPos(e) - this.startPos;
-                if (!this.performanceMode) {
-                    if (this.isHorizontal()) {
+                if (!this.performanceMode) {//bad android 
                         this.translateX = this.startTranslateX + this.delta;
                         this.$emit('slider-move', this.translateX);
-                    } else {
-                        this.translateY = this.startTranslateY + this.delta;
-                        this.$emit('slider-move', this.translateY);
-                    }
                 }
 
-                if (this.isVertical() || this.isHorizontal() && Math.abs(this.delta) > 0) {
+                if (Math.abs(this.delta) > 0) {
                     e.preventDefault();
                     e.stopPropagation();
                 }
@@ -209,7 +182,7 @@ v-for="(slide,index) in slides"
                 this.setPage(this.currentPage);
             },
             _getTouchPos(e) {
-                var key = this.isHorizontal() ? 'pageX' : 'pageY';
+                var key ='pageX'
                 return e.changedTouches ? e.changedTouches[0][key] : e[key];
             },
             _onTransitionStart() {
@@ -262,10 +235,6 @@ v-for="(slide,index) in slides"
     flex-direction: row;
 }
 
-&.vertical .swiper-wrap {
-    flex-direction: column;
-}
-
 &.dragging .swiper-wrap {
     transition: none;
 }
@@ -285,17 +254,6 @@ v-for="(slide,index) in slides"
   .swiper-pagination-bullet.active {
       background: #007aff;
       opacity: 1;
-  }
-}
-
-&.vertical .swiper-pagination {
-    right: 10px;
-    top: 50%;
-    transform: translate3d(0, -50%, 0);
-
-    .swiper-pagination-bullet {
-      display: block;
-      margin: 3px 0;
   }
 }
 
