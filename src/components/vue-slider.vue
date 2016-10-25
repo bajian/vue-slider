@@ -219,8 +219,11 @@
       overflow: hidden;
 
       .swiper-wrap {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -o-box;
+        display: -ms-flexbox;
         display: flex;
-        display: inline-flex;
         width: 100%;
         height: 100%;
         transition: all 0.4s ease;

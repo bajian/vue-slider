@@ -152,7 +152,8 @@
   .swiper {
     height: 150px;
     margin-bottom: 80px;
-    width: 350px;
+    width: 100%;
+    max-width: 350px;
     margin: 0 auto
 
   }
