@@ -19,25 +19,40 @@
   </slider>
   <button @click="prependSlide()">prependSlide</button>
   <button @click="appendSlide()">appendSlide</button>
-<hr/>
-    <slider
-    :pagination-visible="true"
-    :slides="slides"
-    :auto="0"
-    @slide-change-start="onSlideChangeStart"
-    @slide-change-end="onSlideChangeEnd"
-    @slide-revert-start="onSlideRevertStart"
-    @slide-revert-end="onSlideRevertEnd"
-    @slider-move="onSliderMove">
 
-    <div style="position: relative" v-for="(slide,index) in slides" :key="index">
-      <a :href="slide.value">
-        <img width="350" height="180" :src="slide.image" />
-        <span class="title-mask" v-if="slide.title">{{slide.title}}</span>
-      </a>
-    </div>
-  </slider>
-<h4>different style,not repeating,not auto</h4>
+  <hr/>
+  <slider
+  :pagination-visible="true"
+  :slides="slides"
+  :auto="0">
+
+  <div style="position: relative" v-for="(slide,index) in slides" :key="index">
+    <a :href="slide.value">
+      <img width="350" height="180" :src="slide.image" />
+      <span class="title-mask" v-if="slide.title">{{slide.title}}</span>
+    </a>
+  </div>
+</slider>
+<h4>custom style,not repeating,not auto</h4>
+
+<hr/>
+<div style="position: relative">
+  <slider
+  ref="test_prev_next"
+  :pagination-visible="true"
+  :repeating="true"
+  :slides="slides">
+  <div style="position: relative" v-for="(slide,index) in slides" :key="index">
+    <a :href="slide.value">
+      <img width="350" height="180" :src="slide.image" />
+      <span class="title-mask" v-if="slide.title">{{slide.title}}</span>
+    </a>
+  </div>
+</slider>
+<span @click="prev()" class="button-prev">&#60;</span>
+<span @click="next()" class="button-next">&#62;</span>
+</div>
+<h4>previous/next button</h4>
 </div>
 </template>
 
@@ -111,24 +126,58 @@
       },
       removeSlide: function () {
 
+      },
+      prev: function () {
+        console.log('prev click');
+        window.t=this;
+        this.$refs.test_prev_next.prev();
+      },
+      next: function () {
+        console.log('next click');
+        window.t=this;
+        this.$refs.test_prev_next.next();
       }
     }
   }
 </script>
 
 <style>
-.title-mask{
-  opacity: 0.8;
-  background-color: black;
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  height: 1.25rem;/* 50px */
-  line-height: 1.25rem;/* 50px */
-  text-overflow: ellipsis;
-  width: 100%;
-  color: #fff
-}
+  .title-mask{
+    opacity: 0.8;
+    background-color: black;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 1.25rem;/* 50px */
+    line-height: 1.25rem;/* 50px */
+    text-overflow: ellipsis;
+    width: 100%;
+    color: #fff
+  }
+
+  .button-prev{
+    position: absolute;
+    background: transparent;
+    left: 15%;
+    top: 40%;
+    color: red;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 99;
+  }
+
+
+  .button-next{
+    position: absolute;
+    background: transparent;
+    right: 15%;
+    top: 40%;
+    color: red;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 99;
+  }
+
 
   html {
     height: 100%;
@@ -158,21 +207,21 @@
 
   }
 
-/*change the pagination u like */
-.swiper-pagination-bullet.active {
-  background: #FB7299 !important;
-}
-.swiper-pagination-bullet {
-  background: #fff !important;
-  opacity: 1 !important;
-  margin: 0 2px !important;
-  z-index: 9;
-}
+  /*change the pagination u like */
+  .swiper-pagination-bullet.active {
+    background: #FB7299 !important;
+  }
+  .swiper-pagination-bullet {
+    background: #fff !important;
+    opacity: 1 !important;
+    margin: 0 2px !important;
+    z-index: 9;
+  }
 
-.horizontal .swiper-pagination {
-  margin-right: 10px !important;
-  width: 95% !important;
-  text-align: right !important;
-}
+  .horizontal .swiper-pagination {
+    margin-right: 10px !important;
+    width: 95% !important;
+    text-align: right !important;
+  }
 
 </style>

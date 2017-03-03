@@ -3,7 +3,7 @@ auto banner for more function for Vue2.x
 
 ##demo
 
-[live-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo3.html)
+[live-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo4.html)
 
 > A Vue.js project
 
@@ -58,4 +58,10 @@ npm run build
 | slider-move        | `offset`         | Callback function, will be executed when user touch and move finger over Swiper and move it. Receives swiper instance and 'touchmove' event as an arguments. |
 | ================== | ================ | ============================ |
 
-####base on vue-swiper
+### Methods
+| Name                            | Parameters | Description                                                                                                                                                  |
+|--------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| next() | no     | call it to slide to the next slider eg:this.$refs.test_prev_next.next();                                                                                        |
+| prev()   | no     | call it to slide to the previous slider eg:this.$refs.test_prev_next.prev();                                                                                            |
+| ================== | ================ | ============================ |
+
