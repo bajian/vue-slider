@@ -1,13 +1,13 @@
 # slider 
-auto banner for more function for Vue2.x
+easier banner with more function for Vue2.x
 
-##demo
+## demo
 
-[live-demo](https://cdn.rawgit.com/bajian/vue-slider/master/dist/demo4.html)
+[live-demo](https://bajian.github.io/vue-slider/dist/)
 
 > A Vue.js project
 
-## Build Setup
+## Build DEMO Setup
 
 ``` bash
 # install dependencies
@@ -16,8 +16,6 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
 
 ```
 
@@ -46,6 +44,9 @@ npm run build
 | slides      | `Array` | `[]`      | the banner data just be used to observe by pagination when you add or remove a child slide  
 | repeating      | `Boolean` | `false`      | Set true to enable repeating from last to first or first to last                 |
 | auto      | `Number` | `0`      | Set to 0ms to disable silders auto change     |
+| slide-container-class      | `String` | ``      | Set it to add custom style of the slide container . please add the `!important` to overide the old style |
+| pagination-container-class      | `String` | ``      | Set it to add custom style of the pagination container . please add the `!important` to overide the old style |
+| pagination-class      | `String` | ``      | Set it to add custom style of the pagination . please add the `!important` to overide the old style |
 | ==================== | ========= | ============ | =================== |
 
 ### Events

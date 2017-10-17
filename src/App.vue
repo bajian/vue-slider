@@ -13,7 +13,7 @@
 
     <div v-for="(slide,index) in slides" :key="index">
       <a :href="slide.value">
-        <img width="350" height="150" :src="slide.image" />
+        <img width="100%" height="150" :src="slide.image" />
       </a>
     </div>
   </slider>
@@ -41,10 +41,13 @@
   ref="test_prev_next"
   :pagination-visible="true"
   :repeating="true"
+  slide-container-class="custom-slide-container-class"
+  pagination-container-class="custom-pagination-container-class"
+  pagination-class="custom-pagination-class"
   :slides="slides">
   <div style="position: relative" v-for="(slide,index) in slides" :key="index">
     <a :href="slide.value">
-      <img width="350" height="180" :src="slide.image" />
+      <img width="100%" height="180" :src="slide.image" />
       <span class="title-mask" v-if="slide.title">{{slide.title}}</span>
     </a>
   </div>
@@ -52,7 +55,7 @@
 <span @click="prev()" class="button-prev">&#60;</span>
 <span @click="next()" class="button-next">&#62;</span>
 </div>
-<h4>previous/next button</h4>
+<h4>custom previous/next button、custom container-class & pagination-class & pagination-container-class</h4>
 </div>
 </template>
 
@@ -68,7 +71,7 @@
         slides: [{
           "title": "鬼畜频道精选",
           "value": "http://www.bilibili.com/topic/v2/phone1513.html",
-          "image": "http://i0.hdslb.com/bfs/archive/98548a7be48ab9929f02d2c51c2ab801841e5108.jpg",
+          "image": "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1507515098&di=852ed69d68e5869766abef5d0f2e5371&src=http://pic33.nipic.com/20130907/13534366_092511672176_2.jpg",
           "type": 2,
           "weight": 1,
           "remark": "",
@@ -77,7 +80,7 @@
         {
           "title": "逗趣问答一战成神",
           "value": "http://acg.tv/u1ue",
-          "image": "http://i0.hdslb.com/bfs/archive/056f5ad71f17a9fbb9581f16735768e3d9c54008.png",
+          "image": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2856723681,2411189826&fm=27&gp=0.jpg",
           "type": 2,
           "weight": 2,
           "remark": "",
@@ -86,7 +89,7 @@
         {
           "title": "阴阳师",
           "value": "#",
-          "image": "http://i0.hdslb.com/bfs/archive/cf6153a50cb0f3eb27a5836d90be16d4bce8c6f7.jpg",
+          "image": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3439730901,2621203596&fm=27&gp=0.jpg",
           "type": 1,
           "weight": 3,
           "remark": "",
@@ -114,14 +117,14 @@
         this.slides.unshift({
           "title": "bajian prepend",
           "value": "#",
-          "image": "http://i0.hdslb.com/bfs/archive/cf6153a50cb0f3eb27a5836d90be16d4bce8c6f7.jpg",
+          "image": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508121479&di=7549cbb34fbb872d9c9a2986993bb9de&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F110915%2F29-11091512035335.jpg",
         });
       },
       appendSlide: function (slideText) {
         this.slides.push({
           "title": "bajian append",
           "value": "#",
-          "image": "http://i0.hdslb.com/bfs/archive/cf6153a50cb0f3eb27a5836d90be16d4bce8c6f7.jpg",
+          "image": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3439730901,2621203596&fm=27&gp=0.jpg",
         });
       },
       removeSlide: function () {
@@ -198,7 +201,7 @@
     margin: 0 auto
   }
 
-  .swiper {
+  .custom-slide-container-class {
     height: 150px;
     margin-bottom: 80px;
     width: 100%;
@@ -208,17 +211,17 @@
   }
 
   /*change the pagination u like */
-  .swiper-pagination-bullet.active {
+  .custom-pagination-class.active {
     background: #FB7299 !important;
   }
-  .swiper-pagination-bullet {
+  .custom-pagination-class {
     background: #fff !important;
     opacity: 1 !important;
     margin: 0 2px !important;
     z-index: 9;
   }
 
-  .horizontal .swiper-pagination {
+  .custom-pagination-container-class {
     margin-right: 10px !important;
     width: 95% !important;
     text-align: right !important;

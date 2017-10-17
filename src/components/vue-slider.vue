@@ -1,6 +1,6 @@
 <template>
    <div class="swiper"
-    :class="['horizontal', {'dragging': dragging}]"
+    :class="['horizontal', {'dragging': dragging},slideContainerClass]"
     @touchstart="_onTouchStart"
     @wheel="_onWheel">
         <div class="swiper-wrap"
@@ -10,9 +10,10 @@
             <slot></slot>
         </div>
         <div @click="setPage($event)" class="swiper-pagination"
+        :class="[paginationContainerClass]"
         v-show="paginationVisible">
             <span class="swiper-pagination-bullet"
-            :class="{'active': (index+1)==currentPage}"
+            :class="[{'active': (index+1)==currentPage},paginationClass]"
             v-for="(slide,index) in slides"
             :key="index"
             :id="index+1"></span>
@@ -23,6 +24,18 @@
 
     export default {
         props: {
+            paginationClass: {
+                type: String,
+                default: ''
+            },
+            slideContainerClass: {
+                type: String,
+                default: ''
+            },
+            paginationContainerClass: {
+                type: String,
+                default: ''
+            },
             mousewheelControl: {
                 type: Boolean,
                 default: true
@@ -73,6 +86,10 @@
                 this._onTouchEnd = this._onTouchEnd.bind(this);
                 this.slideEls = this.$refs['swiper-wrap'].children;
                 this.autoBegin();
+                window.onresize=()=>{
+                    this.setPage(this.currentPage)
+                    console.log('onresize ',this.currentPage);
+                }
             })
         },
         methods: {
@@ -107,7 +124,7 @@
                 }
             },
             setPage(page) {
-                if (typeof page!="number") //event
+                if (typeof page!="number" && page.target) //event
                     page=page.target.id||1
                     
                 this.autoStop();
